@@ -1,9 +1,8 @@
 package com.example.tp6_grupo_11;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class AgregarContactoActivity extends AppCompatActivity {
+public class AgregarContactoActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
