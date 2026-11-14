@@ -1,8 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.TP6_GRUPO_11" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+<!--    Configuracion de la vista de  paleta de colores propuesta por la catedra-->
+
+    <style name="Base.Theme.TP6_GRUPO_11" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/verde_barra</item>
+        <item name="actionBarStyle">@style/Widget.TP6.ActionBar</item>
+        <item name="android:statusBarColor">@color/verde_barra_oscuro</item>
+    </style>
+
+    <style name="Widget.TP6.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
+        <item name="background">@color/verde_barra</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
 
     <style name="Theme.TP6_GRUPO_11" parent="Base.Theme.TP6_GRUPO_11" />
