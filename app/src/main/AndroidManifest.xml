@@ -12,9 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TP6_GRUPO_11">
         <activity
-            android:name=".MainActivity"
+            android:name=".AgregarContactoActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
