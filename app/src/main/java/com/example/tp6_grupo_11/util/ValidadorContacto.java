@@ -12,7 +12,7 @@ public class ValidadorContacto {
 
     // Solo letras (incluye tildes y ñ) y espacios; prohíbe números y símbolos
     private static final String REGEX_SOLO_LETRAS = "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]+$";
-    // Solo números y guiones opcionales
+    // Solo numeros y guiones opcionales
     private static final String REGEX_TELEFONO = "^[0-9]+(-[0-9]+)*$";
 
     public static boolean validarFormulario(EditText etNombre, EditText etApellido,
