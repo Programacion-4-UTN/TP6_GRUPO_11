@@ -53,5 +53,33 @@ public class AgregarContactoActivity extends BaseActivity {
 
     private void procesarFormulario() {
 
+        if (ValidadorContacto.validarFormulario(
+                etNombre, etApellido, etTelefono, etEmail, etDireccion, etFechaNacimiento)) {
+
+            String nombre = etNombre.getText().toString().trim();
+            String apellido = etApellido.getText().toString().trim();
+            String telefono = etTelefono.getText().toString().trim();
+            String tipoTelefono = spTelefono.getSelectedItem() != null ? spTelefono.getSelectedItem().toString() : "";
+            String email = etEmail.getText().toString().trim();
+            String tipoEmail = spEmail.getSelectedItem() != null ? spEmail.getSelectedItem().toString() : "";
+            String direccion = etDireccion.getText().toString().trim();
+            String fechaNacimiento = etFechaNacimiento.getText().toString().trim();
+
+            Contacto contacto = new Contacto(
+                    nombre,
+                    apellido,
+                    telefono,
+                    tipoTelefono,
+                    email,
+                    tipoEmail,
+                    direccion,
+                    fechaNacimiento
+            );
+
+
+            Intent intent = new Intent(this, MasDatosContactoActivity.class);
+            intent.putExtra("contacto", contacto);
+            startActivity(intent);
+        }
     }
 }
