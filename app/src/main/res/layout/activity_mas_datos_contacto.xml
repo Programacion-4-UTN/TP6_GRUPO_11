@@ -5,9 +5,26 @@
     android:fillViewport="true"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvDatosResumen"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp" />
+        android:orientation="vertical">
+
+        <!-- Encabezado de la pantalla: pide completar mas datos (no muestra los datos ya ingresados) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mas_datos_titulo"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/mas_datos_subtitulo"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 </ScrollView>

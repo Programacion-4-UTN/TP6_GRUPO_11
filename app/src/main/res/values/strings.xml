@@ -2,4 +2,6 @@
     <string name="app_name">EjercicioControles - Grupo 11</string>
     <string name="menu_agregar_contactos">Agregar contactos</string>
     <string name="menu_listar_contactos">Listado de Contactos</string>
+    <string name="mas_datos_titulo">FORMULARIO DE CONTACTO</string>
+    <string name="mas_datos_subtitulo">A continuación, por favor se pide completar más datos personales.</string>
 </resources>

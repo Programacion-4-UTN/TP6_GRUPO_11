@@ -1,15 +1,15 @@
 package com.example.tp6_grupo_11;
 
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tp6_grupo_11.model.Contacto;
 import androidx.core.content.IntentCompat;
+
+import com.example.tp6_grupo_11.model.Contacto;
 
 public class MasDatosContactoActivity extends BaseActivity {
 
-    private TextView tvDatosResumen;
+    // Contacto recibido del formulario del Ejercicio 1 (se guardara junto con los datos nuevos)
     private Contacto contacto;
 
     @Override
@@ -17,29 +17,12 @@ public class MasDatosContactoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mas_datos_contacto);
 
-        tvDatosResumen = findViewById(R.id.tvDatosResumen);
-
-
         if (getIntent() != null && getIntent().hasExtra("contacto")) {
-            //contacto = (Contacto) getIntent().getSerializableExtra("contacto");
             contacto = IntentCompat.getSerializableExtra(getIntent(), "contacto", Contacto.class);
-            if (contacto != null) {
-                mostrarDatosContacto();
-            }
-        } else {
-            Toast.makeText(this, "No se recibieron datos del contacto", Toast.LENGTH_SHORT).show();
         }
-    }
 
-    private void mostrarDatosContacto() {
-        String resumen = "Nombre: " + contacto.getNombre() + " " + contacto.getApellido() + "\n" +
-                "Teléfono: " + contacto.getTelefono() + " (" + contacto.getTipoTelefono() + ")\n" +
-                "Email: " + contacto.getEmail() + " (" + contacto.getTipoEmail() + ")\n" +
-                "Dirección: " + contacto.getDireccion() + "\n" +
-                "Fecha de Nacimiento: " + contacto.getFechaNacimiento();
-
-        if (tvDatosResumen != null) {
-            tvDatosResumen.setText(resumen);
+        if (contacto == null) {
+            Toast.makeText(this, "No se recibieron datos del contacto", Toast.LENGTH_SHORT).show();
         }
     }
 }
