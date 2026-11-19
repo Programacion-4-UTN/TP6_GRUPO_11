@@ -172,7 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:text="Si" />
+                android:text="No" />
         </LinearLayout>
 
         <!-- BOTON GUARDAR -->

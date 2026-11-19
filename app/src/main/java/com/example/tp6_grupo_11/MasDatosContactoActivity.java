@@ -1,10 +1,12 @@
 package com.example.tp6_grupo_11;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.Toast;
-import android.widget.CheckBox;
 import androidx.core.content.IntentCompat;
 
 import com.example.tp6_grupo_11.model.Contacto;
@@ -17,6 +19,9 @@ public class MasDatosContactoActivity extends BaseActivity {
     // Nivel de estudios elegido en el RadioGroup ("" mientras no se haya elegido ninguno)
     private String nivelEstudios = "";
     private CheckBox cbDeporte, cbMusica, cbArte, cbTecnologia;
+    private Switch swRecibirInfo;
+    private Button btnGuardar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +37,25 @@ public class MasDatosContactoActivity extends BaseActivity {
             RadioButton elegido = grupo.findViewById(idSeleccionado);
             nivelEstudios = (elegido != null) ? elegido.getText().toString() : "";
         });
+
         cbDeporte = findViewById(R.id.cbDeporte);
         cbMusica = findViewById(R.id.cbMusica);
         cbArte = findViewById(R.id.cbArte);
         cbTecnologia = findViewById(R.id.cbTecnologia);
+        swRecibirInfo = findViewById(R.id.swRecibirInfo);
+        btnGuardar = findViewById(R.id.btnGuardar);
+
+        // Cambia la etiqueta del Switch entre "Sí" y "No" al cambiar su estado
+        swRecibirInfo.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            swRecibirInfo.setText(isChecked ? "Sí" : "No");
+        });
+
+        btnGuardar.setOnClickListener(v -> {
+            // TODO: Validar que se haya seleccionado al menos un estudio y un interes,
+            // completar el objeto 'contacto' y guardarlo en SQLite con ContactoDao.
+            Toast.makeText(this, "Pendiente: validar y guardar contacto", Toast.LENGTH_SHORT).show();
+        });
+
         if (contacto == null) {
             Toast.makeText(this, "No se recibieron datos del contacto", Toast.LENGTH_SHORT).show();
         }
