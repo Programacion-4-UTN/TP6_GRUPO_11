@@ -6,13 +6,18 @@
     android:fitsSystemWindows="true"
     android:fillViewport="true"
     android:padding="16dp"
+    android:scrollbarSize="8dp"
+    android:fadeScrollbars="false"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
     tools:ignore="HardcodedText">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="16dp">
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp">
 
         <TextView
             android:layout_width="match_parent"
