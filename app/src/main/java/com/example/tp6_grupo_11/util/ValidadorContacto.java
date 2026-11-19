@@ -11,10 +11,15 @@ import java.util.regex.Pattern;
 
 public class ValidadorContacto {
 
-    // Solo letras (incluye tildes y ñ) y espacios; prohíbe números y símbolos
-    private static final String REGEX_SOLO_LETRAS = "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]+$";
+    // Letras (incluye tildes y ñ). Entre palabras admite espacio, guion o apóstrofe
+    // (ej: "María José", "Pérez-Gómez", "D'Angelo"). Prohíbe números y otros símbolos.
+    private static final String REGEX_SOLO_LETRAS =
+            "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+(( +|['-])[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+)*$";
     // Solo numeros y guiones opcionales
     private static final String REGEX_TELEFONO = "^[0-9]+(-[0-9]+)*$";
+    // Cantidad de dígitos (sin contar guiones) aceptada para el teléfono
+    private static final int TELEFONO_MIN_DIGITOS = 6;
+    private static final int TELEFONO_MAX_DIGITOS = 15; // máximo del estándar internacional E.164
     // Email: usuario@dominio.terminacion. La terminacion debe ser de 2 letras (pais: ar, es, uy...)
     // o una generica comun. Patterns.EMAIL_ADDRESS por si solo acepta cosas como ".comasdasdasda".
     private static final Pattern PATRON_EMAIL = Pattern.compile(
@@ -34,7 +39,7 @@ public class ValidadorContacto {
             esValido = false;
             primerCampoConError = etNombre;
         } else if (!nombre.matches(REGEX_SOLO_LETRAS)) {
-            etNombre.setError("Nombre inválido: debe contener solo letras y espacios, sin números ni símbolos.");
+            etNombre.setError("Nombre inválido: debe contener solo letras (se admiten espacio, guion y apóstrofe entre palabras), sin números ni otros símbolos.");
             esValido = false;
             primerCampoConError = etNombre;
         }
@@ -46,7 +51,7 @@ public class ValidadorContacto {
             esValido = false;
             if (primerCampoConError == null) primerCampoConError = etApellido;
         } else if (!apellido.matches(REGEX_SOLO_LETRAS)) {
-            etApellido.setError("Apellido inválido: debe contener solo letras y espacios, sin números ni símbolos.");
+            etApellido.setError("Apellido inválido: debe contener solo letras (se admiten espacio, guion y apóstrofe entre palabras), sin números ni otros símbolos.");
             esValido = false;
             if (primerCampoConError == null) primerCampoConError = etApellido;
         }
@@ -59,6 +64,12 @@ public class ValidadorContacto {
             if (primerCampoConError == null) primerCampoConError = etTelefono;
         } else if (!telefono.matches(REGEX_TELEFONO)) {
             etTelefono.setError("Teléfono inválido: ingresá solo números y guiones opcionales (ej: 11-4567-8901), sin letras ni espacios.");
+            esValido = false;
+            if (primerCampoConError == null) primerCampoConError = etTelefono;
+        } else if (telefono.replace("-", "").length() < TELEFONO_MIN_DIGITOS
+                || telefono.replace("-", "").length() > TELEFONO_MAX_DIGITOS) {
+            etTelefono.setError("Teléfono inválido: debe tener entre " + TELEFONO_MIN_DIGITOS
+                    + " y " + TELEFONO_MAX_DIGITOS + " dígitos (sin contar los guiones).");
             esValido = false;
             if (primerCampoConError == null) primerCampoConError = etTelefono;
         }
@@ -91,7 +102,7 @@ public class ValidadorContacto {
             esValido = false;
             if (primerCampoConError == null) primerCampoConError = etFechaNac;
         } else if (!esFechaValida(fecha)) {
-            etFechaNac.setError("Fecha inválida: usá el formato dd/mm/aaaa con una fecha real y anterior a hoy.");
+            etFechaNac.setError("Fecha inválida: usá el formato dd/mm/aaaa con una fecha real que no sea futura.");
             esValido = false;
             if (primerCampoConError == null) primerCampoConError = etFechaNac;
         }
