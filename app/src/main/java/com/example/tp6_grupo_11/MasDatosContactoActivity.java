@@ -5,6 +5,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tp6_grupo_11.model.Contacto;
+import androidx.core.content.IntentCompat;
 
 public class MasDatosContactoActivity extends BaseActivity {
 
@@ -20,7 +21,8 @@ public class MasDatosContactoActivity extends BaseActivity {
 
 
         if (getIntent() != null && getIntent().hasExtra("contacto")) {
-            contacto = (Contacto) getIntent().getSerializableExtra("contacto");
+            //contacto = (Contacto) getIntent().getSerializableExtra("contacto");
+            contacto = IntentCompat.getSerializableExtra(getIntent(), "contacto", Contacto.class);
             if (contacto != null) {
                 mostrarDatosContacto();
             }
