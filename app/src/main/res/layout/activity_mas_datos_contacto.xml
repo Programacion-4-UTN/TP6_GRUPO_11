@@ -143,9 +143,47 @@
                 android:minHeight="48dp"
                 android:text="@string/interes_tecnologia" />
 
+
+
+
         </LinearLayout>
 
+
+
     </LinearLayout>
+
+        <!-- Switch: "DESEA RECIBIR INFORMACION" -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="DESEA RECIBIR INFORMACION?"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/swRecibirInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="Si" />
+        </LinearLayout>
+
+        <!-- BOTON GUARDAR -->
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:minHeight="48dp"
+            android:text="GUARDAR" />
 
     </LinearLayout>
 </ScrollView>
