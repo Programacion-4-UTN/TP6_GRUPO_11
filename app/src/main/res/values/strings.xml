@@ -4,4 +4,10 @@
     <string name="menu_listar_contactos">Listado de Contactos</string>
     <string name="mas_datos_titulo">FORMULARIO DE CONTACTO</string>
     <string name="mas_datos_subtitulo">A continuación, por favor se pide completar más datos personales.</string>
+    <string name="estudios_titulo">NIVEL DE ESTUDIOS ALCANZADOS</string>
+    <string name="estudio_primario_incompleto">Primario incompleto</string>
+    <string name="estudio_primario_completo">Primario completo</string>
+    <string name="estudio_secundario_incompleto">Secundario incompleto</string>
+    <string name="estudio_secundario_completo">Secundario completo</string>
+    <string name="estudio_otros">Otros</string>
 </resources>

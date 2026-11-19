@@ -1,6 +1,8 @@
 package com.example.tp6_grupo_11;
 
 import android.os.Bundle;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.core.content.IntentCompat;
@@ -12,6 +14,9 @@ public class MasDatosContactoActivity extends BaseActivity {
     // Contacto recibido del formulario del Ejercicio 1 (se guardara junto con los datos nuevos)
     private Contacto contacto;
 
+    // Nivel de estudios elegido en el RadioGroup ("" mientras no se haya elegido ninguno)
+    private String nivelEstudios = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +26,20 @@ public class MasDatosContactoActivity extends BaseActivity {
             contacto = IntentCompat.getSerializableExtra(getIntent(), "contacto", Contacto.class);
         }
 
+        // SELECTOR DE ESTUDIOS: guarda el texto de la opcion elegida cada vez que cambia
+        RadioGroup rgEstudios = findViewById(R.id.rgEstudios);
+        rgEstudios.setOnCheckedChangeListener((grupo, idSeleccionado) -> {
+            RadioButton elegido = grupo.findViewById(idSeleccionado);
+            nivelEstudios = (elegido != null) ? elegido.getText().toString() : "";
+        });
+
         if (contacto == null) {
             Toast.makeText(this, "No se recibieron datos del contacto", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /** Nivel de estudios elegido, o "" si todavia no se eligio ninguno. */
+    public String getNivelEstudios() {
+        return nivelEstudios;
     }
 }
