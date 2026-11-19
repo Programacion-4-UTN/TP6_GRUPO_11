@@ -81,7 +81,71 @@
                     android:minHeight="48dp"
                     android:text="@string/estudio_otros" />
             </RadioGroup>
+
+            </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/intereses_titulo"
+        android:textStyle="bold" />
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_grupo_borde"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Fila 1: Deporte y Musica -->
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cbDeporte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:text="@string/interes_deporte" />
+
+            <CheckBox
+                android:id="@+id/cbMusica"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:text="@string/interes_musica" />
         </LinearLayout>
+
+        <!-- Fila 2: Arte y Tecnologia -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cbArte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:text="@string/interes_arte" />
+
+            <CheckBox
+                android:id="@+id/cbTecnologia"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:text="@string/interes_tecnologia" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

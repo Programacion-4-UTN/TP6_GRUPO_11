@@ -10,4 +10,13 @@
     <string name="estudio_secundario_incompleto">Secundario incompleto</string>
     <string name="estudio_secundario_completo">Secundario completo</string>
     <string name="estudio_otros">Otros</string>
+
+    <string name="intereses_titulo">INTERESES</string>
+    <string name="interes_deporte">Deporte</string>
+    <string name="interes_musica">Musica</string>
+    <string name="interes_arte">Arte</string>
+    <string name="interes_tecnologia">Tecnologia</string>
+
+
+
 </resources>

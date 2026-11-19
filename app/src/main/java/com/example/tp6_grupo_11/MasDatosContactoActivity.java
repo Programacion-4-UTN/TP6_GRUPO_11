@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
+import android.widget.CheckBox;
 import androidx.core.content.IntentCompat;
 
 import com.example.tp6_grupo_11.model.Contacto;
@@ -16,7 +16,7 @@ public class MasDatosContactoActivity extends BaseActivity {
 
     // Nivel de estudios elegido en el RadioGroup ("" mientras no se haya elegido ninguno)
     private String nivelEstudios = "";
-
+    private CheckBox cbDeporte, cbMusica, cbArte, cbTecnologia;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +32,10 @@ public class MasDatosContactoActivity extends BaseActivity {
             RadioButton elegido = grupo.findViewById(idSeleccionado);
             nivelEstudios = (elegido != null) ? elegido.getText().toString() : "";
         });
-
+        cbDeporte = findViewById(R.id.cbDeporte);
+        cbMusica = findViewById(R.id.cbMusica);
+        cbArte = findViewById(R.id.cbArte);
+        cbTecnologia = findViewById(R.id.cbTecnologia);
         if (contacto == null) {
             Toast.makeText(this, "No se recibieron datos del contacto", Toast.LENGTH_SHORT).show();
         }
