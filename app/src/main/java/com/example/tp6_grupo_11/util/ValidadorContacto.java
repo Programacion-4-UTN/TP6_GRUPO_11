@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class ValidadorContacto {
 
@@ -14,6 +15,11 @@ public class ValidadorContacto {
     private static final String REGEX_SOLO_LETRAS = "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]+$";
     // Solo numeros y guiones opcionales
     private static final String REGEX_TELEFONO = "^[0-9]+(-[0-9]+)*$";
+    // Email: usuario@dominio.terminacion. La terminacion debe ser de 2 letras (pais: ar, es, uy...)
+    // o una generica comun. Patterns.EMAIL_ADDRESS por si solo acepta cosas como ".comasdasdasda".
+    private static final Pattern PATRON_EMAIL = Pattern.compile(
+            "^[A-Z0-9._%+-]+@([A-Z0-9-]+\\.)+([A-Z]{2}|COM|NET|ORG|EDU|GOV|MIL|INT|INFO|BIZ|APP|DEV|ONLINE|STORE|TECH)$",
+            Pattern.CASE_INSENSITIVE);
 
     public static boolean validarFormulario(EditText etNombre, EditText etApellido,
                                             EditText etTelefono, EditText etEmail,
@@ -63,7 +69,8 @@ public class ValidadorContacto {
             etEmail.setError("Campo obligatorio: ingresá un correo electrónico.");
             esValido = false;
             if (primerCampoConError == null) primerCampoConError = etEmail;
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()
+                || !PATRON_EMAIL.matcher(email).matches()) {
             etEmail.setError("Email inválido: debe respetar el formato usuario@dominio.com.");
             esValido = false;
             if (primerCampoConError == null) primerCampoConError = etEmail;
