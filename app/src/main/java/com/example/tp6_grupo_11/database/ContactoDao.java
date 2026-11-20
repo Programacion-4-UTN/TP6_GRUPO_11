@@ -45,10 +45,6 @@ public class ContactoDao {
         return idInsertado;
     }
 
-    /**
-     * Devuelve todos los contactos guardados, ordenados por apellido y nombre
-     * (sin distinguir mayusculas). Si no hay ninguno, devuelve una lista vacia.
-     */
     public List<Contacto> obtenerTodos() {
         List<Contacto> contactos = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
