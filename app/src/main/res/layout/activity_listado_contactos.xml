@@ -12,6 +12,14 @@
         android:textSize="22sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/tvCantidadContactos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Total de contactos: 0"
+        android:textSize="14sp" />
+
     <ListView
         android:id="@+id/lvContactos"
         android:layout_width="match_parent"
