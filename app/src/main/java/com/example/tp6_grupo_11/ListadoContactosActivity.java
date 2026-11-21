@@ -1,18 +1,20 @@
 package com.example.tp6_grupo_11;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast; // <-- [AGREGADO]
 
+import com.example.tp6_grupo_11.adapters.ContactoAdapter; // <-- [AGREGADO]
 import com.example.tp6_grupo_11.database.ContactoDao;
 import com.example.tp6_grupo_11.model.Contacto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListadoContactosActivity extends BaseActivity {
 
     private ListView lvContactos;
+    private TextView tvSinContactos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +22,19 @@ public class ListadoContactosActivity extends BaseActivity {
         setContentView(R.layout.activity_listado_contactos);
 
         lvContactos = findViewById(R.id.lvContactos);
+        tvSinContactos = findViewById(R.id.tvSinContactos);
+
+        // Muestra automáticamente tvSinContactos cuando la lista está vacía
+        lvContactos.setEmptyView(tvSinContactos);
+
+        // [AGREGADO] Evento al tocar un contacto de la lista (listo para implementar el detalle)
+        lvContactos.setOnItemClickListener((parent, view, position, id) -> {
+            Contacto contactoSeleccionado = (Contacto) parent.getItemAtPosition(position);
+            if (contactoSeleccionado != null) {
+                // TODO: Mostrar todos los datos de 'contactoSeleccionado' en un popup o en pantalla
+                Toast.makeText(this, "Seleccionado: " + contactoSeleccionado.getNombre(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // Se recarga cada vez que la pantalla vuelve a mostrarse, asi aparecen los contactos recien guardados
@@ -29,16 +44,9 @@ public class ListadoContactosActivity extends BaseActivity {
         cargarContactos();
     }
 
-    /** Lee los contactos de SQLite y los muestra como "NOMBRE APELLIDO - MAIL". */
+    /** Lee los contactos de SQLite y los carga en el ListView mediante ContactoAdapter. */
     private void cargarContactos() {
         List<Contacto> contactos = new ContactoDao(this).obtenerTodos();
-
-        List<String> filas = new ArrayList<>();
-        for (Contacto c : contactos) {
-            filas.add(c.getNombre() + " " + c.getApellido() + " \u2013 " + c.getEmail());
-        }
-
-        lvContactos.setAdapter(new ArrayAdapter<>(
-                this, android.R.layout.simple_list_item_1, filas));
+        lvContactos.setAdapter(new ContactoAdapter(this, contactos)); // <-- [ACTUALIZADO]
     }
 }
