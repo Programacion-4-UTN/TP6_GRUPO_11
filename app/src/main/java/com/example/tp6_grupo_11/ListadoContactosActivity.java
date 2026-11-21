@@ -1,6 +1,7 @@
 package com.example.tp6_grupo_11;
 
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
@@ -9,6 +10,7 @@ import com.example.tp6_grupo_11.adapters.ContactoAdapter;
 import com.example.tp6_grupo_11.database.ContactoDao;
 import com.example.tp6_grupo_11.model.Contacto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListadoContactosActivity extends BaseActivity {
@@ -16,6 +18,9 @@ public class ListadoContactosActivity extends BaseActivity {
     private ListView lvContactos;
     private TextView tvSinContactos;
     private TextView tvCantidadContactos;
+
+    private EditText etBuscarContacto;
+    private List<Contacto> listaCompletaContactos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,16 @@ public class ListadoContactosActivity extends BaseActivity {
         lvContactos = findViewById(R.id.lvContactos);
         tvSinContactos = findViewById(R.id.tvSinContactos);
         tvCantidadContactos = findViewById(R.id.tvCantidadContactos);
+        etBuscarContacto = findViewById(R.id.etBuscarContacto);
+        etBuscarContacto.addTextChangedListener(new android.text.TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                filtrarContactos(s.toString());
+
+            }
+            @Override public void afterTextChanged(android.text.Editable s) {}
+        });
 
         // Muestra automáticamente tvSinContactos cuando la lista está vacía
         lvContactos.setEmptyView(tvSinContactos);
@@ -45,13 +60,28 @@ public class ListadoContactosActivity extends BaseActivity {
         cargarContactos();
     }
 
-    /** Lee los contactos de SQLite y los carga en el ListView mediante ContactoAdapter. */
+    /** obtengo los contactos,  el texto insertado para buscar, y lo filtro segun eso  */
     private void cargarContactos() {
-        List<Contacto> contactos = new ContactoDao(this).obtenerTodos();
-        tvCantidadContactos.setText("Total de contactos: " + contactos.size());
-        lvContactos.setAdapter(new ContactoAdapter(this, contactos));
+        listaCompletaContactos = new ContactoDao(this).obtenerTodos();
+        String textoActual = (etBuscarContacto != null) ? etBuscarContacto.getText().toString() : "";
+        filtrarContactos(textoActual);
     }
 
+    private void filtrarContactos(String textoActual) {
+        String filtro = textoActual.trim().toLowerCase();
+        List<Contacto> filtrados = new ArrayList<>();
+
+        for (Contacto c : listaCompletaContactos) {
+            String nombreCompleto = (c.getNombre() + " " + c.getApellido()).toLowerCase();
+            String email = (c.getEmail() != null) ? c.getEmail().toLowerCase() : "";
+            if (filtro.isEmpty() || nombreCompleto.contains(filtro) || email.contains(filtro)) {
+                filtrados.add(c);
+            }
+        }
+
+        tvCantidadContactos.setText("Total de contactos: " + filtrados.size());
+        lvContactos.setAdapter(new ContactoAdapter(this, filtrados));
+    }
     private String armarDetalleContacto(Contacto c) {
         return "Nombre: " + c.getNombre() + " " + c.getApellido() + "\n"
                 + "Teléfono: " + c.getTelefono() + " (" + (c.getTipoTelefono() != null ? c.getTipoTelefono() : "") + ")\n"

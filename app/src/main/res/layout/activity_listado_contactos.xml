@@ -19,7 +19,16 @@
         android:layout_marginTop="4dp"
         android:text="Total de contactos: 0"
         android:textSize="14sp" />
-
+    <EditText
+        android:id="@+id/etBuscarContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:minHeight="48dp"
+        android:hint="Buscar por nombre, apellido o email..."
+        android:inputType="text"
+        android:importantForAutofill="no" />
     <ListView
         android:id="@+id/lvContactos"
         android:layout_width="match_parent"
