@@ -15,6 +15,7 @@ public class ListadoContactosActivity extends BaseActivity {
 
     private ListView lvContactos;
     private TextView tvSinContactos;
+    private TextView tvCantidadContactos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class ListadoContactosActivity extends BaseActivity {
 
         lvContactos = findViewById(R.id.lvContactos);
         tvSinContactos = findViewById(R.id.tvSinContactos);
+        tvCantidadContactos = findViewById(R.id.tvCantidadContactos);
 
         // Muestra automáticamente tvSinContactos cuando la lista está vacía
         lvContactos.setEmptyView(tvSinContactos);
@@ -46,6 +48,7 @@ public class ListadoContactosActivity extends BaseActivity {
     /** Lee los contactos de SQLite y los carga en el ListView mediante ContactoAdapter. */
     private void cargarContactos() {
         List<Contacto> contactos = new ContactoDao(this).obtenerTodos();
+        tvCantidadContactos.setText("Total de contactos: " + contactos.size());
         lvContactos.setAdapter(new ContactoAdapter(this, contactos));
     }
 
